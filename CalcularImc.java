@@ -6,11 +6,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-public class Main {
-public static void main(String[] args) {
-JFrame frame = new JFrame("Calculadora de IMC");
-frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-frame.setSize(350, 250);
+public class CalcularImc { // Nome da classe = nome do arquivo!
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculadora de IMC");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(350, 250);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(5, 2, 10, 10));
@@ -40,15 +40,11 @@ frame.setSize(350, 250);
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String pesoTexto = pesoField.getText().replace(",", ".");
-                    String alturaTexto = alturaField.getText().replace(",", ".");
-
-                    double peso = Double.parseDouble(pesoTexto);
-                    double altura = Double.parseDouble(alturaTexto);
-
+                    double peso = Double.parseDouble(pesoField.getText().replace(",", "."));
+                    double altura = Double.parseDouble(alturaField.getText().replace(",", "."));
                     double imc = peso / (altura * altura);
-                    String classificacao;
 
+                    String classificacao;
                     if (imc < 18.5) classificacao = "Abaixo do peso";
                     else if (imc < 24.9) classificacao = "Peso normal";
                     else if (imc < 29.9) classificacao = "Sobrepeso";
@@ -59,11 +55,9 @@ frame.setSize(350, 250);
                     DecimalFormat df = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
                     resultadoLabel.setText("IMC: " + df.format(imc) + " - " + classificacao);
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Por favor, insira valores válidos. Ex: 70,5 e 1,75");
+                    JOptionPane.showMessageDialog(frame, "Insira valores numéricos válidos!");
                 }
             }
         });
     }
 }
-
-
